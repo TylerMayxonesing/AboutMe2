@@ -43,6 +43,23 @@ class MainActivity : AppCompatActivity() {
         Before, the keyboard would remain visible even after entering the user's nickname*/
     }
 
+    private fun updateNickname(view: View){ /*This function will allow the user to edit
+                                            their nicknames*/
+        val editText = findViewById<EditText>(R.id.nickname_edit)
+        val doneButton = findViewById<Button>(R.id.button_done)
+
+        editText.visibility = View.VISIBLE
+        doneButton.visibility = View.VISIBLE
+        view.visibility = View.GONE
+
+        editText.requestFocus()
+
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(editText, 0)
+        //This will bring the keyboard back up, so the user can begin typing their new nicknames
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -51,6 +68,11 @@ class MainActivity : AppCompatActivity() {
             a method of button Views which will execute when the button is clicked*/
 
             addNickname(it) //"it" refers to the button_done view which is passed in as a reference
+        }
+
+        findViewById<TextView>(R.id.nickname_text).setOnClickListener{ /* If the user clicks on
+                                            their nickname, then they will be able to update it */
+            updateNickname(it)
         }
     }
 }
