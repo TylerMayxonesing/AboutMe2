@@ -1,8 +1,10 @@
 package com.android.example.aboutme
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -34,6 +36,11 @@ class MainActivity : AppCompatActivity() {
         nickNameTextView.visibility = View.VISIBLE
         /*Finally we make the text View which will show the user's nick name visible
         */
+
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+        /*Function to hide the keyboard after pressing the "Done" button.
+        Before, the keyboard would remain visible even after entering the user's nickname*/
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
